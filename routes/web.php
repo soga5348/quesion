@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\FirstMiddleware;
+use App\Http\Controllers\AuthorController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,7 @@ use App\Http\Middleware\FirstMiddleware;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/home', [AuthorController::class, 'index']);
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,6 +26,10 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+Route::get('/home', [AuthorController::class, 'get2']);
+Route::post('/home', [AuthorController::class, 'post2']);
+Route::get('/register', [AuthorController::class, 'get']);
+Route::post('/register', [AuthorController::class, 'post']);//変更
 
-Route::get('/middleware', [AuthorController::class, 'get']);
-Route::post('/middleware', [AuthorController::class, 'post'])->middleware(FirstMiddleware::class);
+
+
